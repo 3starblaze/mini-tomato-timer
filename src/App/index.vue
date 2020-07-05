@@ -1,6 +1,15 @@
 <template>
-    <div>
-        <h1>Hello, World!</h1>
+    <div id="main">
+        <div class="display-bar">
+            <span class="timer">00:00</span>
+            <span class="play">&#9654;</span>
+            <span class="stop">&#9209;</span>
+        </div>
+        <div class="mode-bar">
+            <span>Session</span>
+            <span>Short Break</span>
+            <span>Long Break</span>
+        </div>
     </div>
 </template>
 
