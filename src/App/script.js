@@ -11,5 +11,12 @@ export default {
             seconds = (seconds.length == 1 ? '0' : '') + seconds
             return `${minutes}:${seconds}`;
         },
+    },
+    methods: {
+        startTicking: function() {
+            setInterval(() => {
+                this.currentTime -= 1000;
+            }, 1000);
+        },
     }
 }

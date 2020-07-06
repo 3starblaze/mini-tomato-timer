@@ -6,7 +6,7 @@
             <span class="stop">&#9209;</span>
         </div>
         <div class="mode-bar">
-            <span>Session</span>
+            <span @click="startTicking">Session</span>
             <span>Short Break</span>
             <span>Long Break</span>
         </div>
