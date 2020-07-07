@@ -14,12 +14,22 @@ export default {
         },
     },
     methods: {
+        onTickEnd: function() {
+            console.log("it's over!");
+        },
         startTicking: function(minutes) {
             this.currentTime = minutes * 1000 * 60;
             if (this.currentTimerId) clearInterval(this.currentTimerId);
 
             this.currentTimerId = setInterval(() => {
                 this.currentTime -= 1000;
+
+                if (this.currentTime <= 0) {
+                    this.currentTime = 0;
+                    clearInterval(this.currentTimerId);
+                    this.currentTimerId = null;
+                    this.onTickEnd();
+                }
             }, 1000);
         },
     }
