@@ -14,8 +14,10 @@ export default {
         },
     },
     methods: {
-        startTicking: function() {
+        startTicking: function(minutes) {
+            this.currentTime = minutes * 1000 * 60;
             if (this.currentTimerId) clearInterval(this.currentTimerId);
+
             this.currentTimerId = setInterval(() => {
                 this.currentTime -= 1000;
             }, 1000);
