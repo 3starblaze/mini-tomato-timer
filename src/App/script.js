@@ -2,6 +2,7 @@ export default {
     name: 'App',
     data: () => ({
         currentTime: 25 * 1000 * 60,
+        currentTimerId: null,
     }),
     computed: {
         formattedTime: function() {
@@ -14,7 +15,8 @@ export default {
     },
     methods: {
         startTicking: function() {
-            setInterval(() => {
+            if (this.currentTimerId) clearInterval(this.currentTimerId);
+            this.currentTimerId = setInterval(() => {
                 this.currentTime -= 1000;
             }, 1000);
         },
