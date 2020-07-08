@@ -3,6 +3,7 @@ export default {
     data: () => ({
         currentTime: 25 * 1000 * 60,
         currentTimerId: null,
+        notificationPermission: Notification.permission,
     }),
     computed: {
         formattedTime: function() {
@@ -32,5 +33,10 @@ export default {
                 }
             }, 1000);
         },
-    }
+        askNotification: function() {
+            Notification.requestPermission().then(function(result) {
+                this.notificationPermission = result;
+            });
+        },
+    },
 }
