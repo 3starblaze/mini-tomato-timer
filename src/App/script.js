@@ -1,5 +1,10 @@
+import SettingsComponent from '../SettingsComponent/index.vue';
+
 export default {
     name: 'App',
+    components: {
+        "settings": SettingsComponent,
+    },
     data: () => ({
         currentTime: 25 * 1000 * 60,
         currentTimerId: null,

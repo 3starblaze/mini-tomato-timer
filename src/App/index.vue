@@ -1,5 +1,6 @@
 <template>
     <div id="main">
+        <settings></settings>
         <div class="display-bar">
             <span class="timer">{{ formattedTime }}</span>
             <span class="play">&#9654;</span>
