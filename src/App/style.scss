@@ -1,5 +1,4 @@
-$dark: #2d2d2d;
-$light: #c6c6c6;
+@import '../_variables.scss';
 
 * {
     box-sizing: border-box;
@@ -15,33 +14,4 @@ body {
     display: grid;
     justify-content: center;
     align-content: center;
-}
-
-.display-bar {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-
-    grid-template-columns: 1fr auto auto;
-    & > * {
-        padding: 10px;
-    }
-    .timer {
-        font-size: 4em;
-    }
-}
-
-.mode-bar {
-    button {
-        padding: 10px;
-        background: $dark;
-        color: inherit;
-        cursor: pointer;
-        outline: none;
-
-        &::-moz-focus-inner {
-            border: 0;
-        }
-    }
-
 }
