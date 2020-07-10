@@ -1,7 +1,7 @@
 <template>
     <div id="main">
-        <settings></settings>
-        <control-bar></control-bar>
+        <settings id="corner-bar"></settings>
+        <control-bar id="center"></control-bar>
     </div>
 </template>
 
