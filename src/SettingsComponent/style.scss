@@ -1,0 +1,9 @@
+.popup {
+    visibility: hidden;
+    list-style: none;
+    padding: 0;
+
+    &.visible {
+        visibility: visible;
+    }
+}
