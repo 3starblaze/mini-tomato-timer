@@ -21,3 +21,15 @@ body {
     top: 10px;
     left: 10px;
 }
+
+button {
+        padding: 10px;
+        background: $dark;
+        color: inherit;
+        cursor: pointer;
+        outline: none;
+
+        &::-moz-focus-inner {
+            border: 0;
+        }
+}
