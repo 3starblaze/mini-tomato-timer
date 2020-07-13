@@ -2,6 +2,10 @@
     <div>
         <button @click="toggleVisibility">Settings</button>
         <ul class="popup" :class="{ visible }">
+            <li v-if="notificationPermission !='granted'">
+                Notifications are not enabled for this site.
+                <button @click="askNotification">Enable notifications</button>
+            </li>
             <li>Settings Option #1</li>
             <li>Settings Option #2</li>
             <li>Settings Option #3</li>
