@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         onTickEnd: function() {
-            console.log("it's over!");
+            new Notification("Time is over!");
         },
         startTicking: function(minutes) {
             this.currentTime = minutes * 1000 * 60;
