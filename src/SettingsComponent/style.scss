@@ -1,3 +1,5 @@
+@import '../_variables.scss';
+
 .popup {
     visibility: hidden;
     list-style: none;
@@ -6,4 +8,10 @@
     &.visible {
         visibility: visible;
     }
+}
+
+button.active {
+    font-weight: bold;
+    color: $dark;
+    background: $light;
 }
