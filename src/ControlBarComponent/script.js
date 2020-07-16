@@ -1,3 +1,6 @@
+import tmpBeepSound from '../assets/crappy_beep.mp3';
+const beepSound = new Audio(tmpBeepSound);
+
 export default {
     name: 'ControlBar',
     data: () => ({
@@ -17,6 +20,7 @@ export default {
     methods: {
         onTickEnd: function() {
             new Notification("Time is over!");
+            this.beep();
         },
         startTicking: function(minutes) {
             this.currentTime = minutes * 1000 * 60;
@@ -37,6 +41,17 @@ export default {
             Notification.requestPermission().then(function(result) {
                 this.notificationPermission = result;
             });
+        },
+        beep() {
+            const timesToBeep = 3;
+            beepSound.play();
+            let timesBeeped = 1;
+            beepSound.onended = () => {
+                if (timesBeeped < timesToBeep) {
+                    beepSound.play();
+                    timesBeeped++;
+                }
+            }
         },
     },
 }

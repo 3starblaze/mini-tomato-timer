@@ -1,3 +1,5 @@
+const path = require('path');
+
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
@@ -15,6 +17,11 @@ module.exports = {
                     'css-loader',
                     'sass-loader',
                 ]
+            },
+            {
+                test: /\.mp3$/,
+                include: path.resolve(__dirname, 'src/assets'),
+                loader: 'file-loader',
             },
         ],
     },
