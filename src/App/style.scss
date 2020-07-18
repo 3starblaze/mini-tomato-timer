@@ -33,3 +33,9 @@ button {
             border: 0;
         }
 }
+
+button.active {
+    font-weight: bold;
+    color: $dark;
+    background: $light;
+}
