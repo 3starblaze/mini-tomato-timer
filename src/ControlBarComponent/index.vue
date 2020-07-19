@@ -6,9 +6,18 @@
             <span class="stop">&#9209;</span>
         </div>
         <div class="mode-bar">
-            <button @click="startTicking(25)">Session</button>
-            <button @click="startTicking(5)">Short Break</button>
-            <button @click="startTicking(10)">Long Break</button>
+            <button id="session-button"
+                    @click="sessionTick"
+                    :class="{ active: activeButton === 'session' }"
+            >Session</button>
+            <button id="short-break-button"
+                    @click="shortBreakTick"
+                    :class="{ active: activeButton === 'shortBreak' }"
+            >Short Break</button>
+            <button id="long-break-button"
+                    @click="longBreakTick"
+                    :class="{ active: activeButton === 'longBreak' }"
+            >Long Break</button>
         </div>
     </div>
 </template>
