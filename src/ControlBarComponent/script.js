@@ -7,6 +7,7 @@ export default {
         currentTime: 25 * 1000 * 60,
         currentTimerId: null,
         notificationPermission: Notification.permission,
+        activeButton: null,
     }),
     computed: {
         formattedTime: function() {
@@ -19,6 +20,7 @@ export default {
     },
     methods: {
         onTickEnd: function() {
+            this.activeButton = null;
             new Notification("Time is over!");
             this.beep();
         },
@@ -53,5 +55,17 @@ export default {
                 }
             }
         },
+        sessionTick() {
+            this.startTicking(25);
+            this.activeButton = 'session';
+        },
+        shortBreakTick() {
+            this.startTicking(5);
+            this.activeButton = 'shortBreak';
+        },
+        longBreakTick() {
+            this.startTicking(10);
+            this.activeButton = 'longBreak';
+        }
     },
 }

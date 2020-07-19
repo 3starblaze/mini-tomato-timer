@@ -13,3 +13,16 @@
         font-size: 4em;
     }
 }
+
+.mode-bar {
+    display: flex;
+
+    button {
+        margin: 0 5px;
+        flex-basis: 33%;
+
+        &.active {
+            flex-basis: 50%;
+        }
+    }
+}
