@@ -1,8 +1,14 @@
 import tmpBeepSound from '../assets/crappy_beep.mp3';
 const beepSound = new Audio(tmpBeepSound);
+import PlayButton from '../assets/play.svg';
+import StopButton from '../assets/stop.svg';
 
 export default {
     name: 'ControlBar',
+    components: {
+        PlayButton,
+        StopButton,
+    },
     data: () => ({
         currentTime: 25 * 1000 * 60,
         currentTimerId: null,

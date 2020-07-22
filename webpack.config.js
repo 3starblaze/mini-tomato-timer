@@ -23,6 +23,10 @@ module.exports = {
                 include: path.resolve(__dirname, 'src/assets'),
                 loader: 'file-loader',
             },
+            {
+                test: /\.svg/,
+                loader: 'vue-svg-loader',
+            }
         ],
     },
     plugins: [
