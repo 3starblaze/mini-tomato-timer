@@ -5,12 +5,17 @@ export default class Timer {
         this.updateRate = updateRate;
     }
 
-    start(minutes) {
-        this.currentTime = minutes * 1000 * 60;
-
+    clearTimer() {
         if (this.currentTimerId !== null) {
             clearInterval(this.currentTimerId);
+            this.currentTimerId = null;
         }
+    }
+
+    start(minutes) {
+        this.currentTime = minutes * 1000 * 60;
+        this.clearTimer();
+
         this.currentTimerId = setInterval(() => {
             this.currentTime -= this.updateRate;
             if (this.tickCallback !== null) this.tickCallback(this.currentTime);
@@ -27,6 +32,6 @@ export default class Timer {
     }
 
     stop() {
-        if (this.currentTimerId !== null) clearInterval(this.currentTimerId);
+        this.clearTimer();
     }
 }
