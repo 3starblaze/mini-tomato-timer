@@ -1,6 +1,7 @@
 export default class Timer {
-    constructor(onStopCallback=null) {
+    constructor(onStopCallback=null, tickCallback=null) {
         this.onStopCallback = onStopCallback;
+        this.tickCallback = tickCallback;
     }
 
     start(minutes) {
@@ -8,6 +9,7 @@ export default class Timer {
 
         this.currentTimerId = setInterval(() => {
             this.currentTime -= 1000;
+            if (this.tickCallback !== null) this.tickCallback(this.currentTime);
 
             if (this.currentTime <= 0) {
                 this.currentTime = 0;
