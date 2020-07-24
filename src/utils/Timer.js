@@ -29,6 +29,10 @@ export default class Timer {
 
     start(minutes) {
         this.currentTime = minutes * 1000 * 60;
+        this.play();
+    }
+
+    play() {
         this.clearTimer();
         this.scheduleTick();
     }
