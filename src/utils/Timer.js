@@ -7,6 +7,9 @@ export default class Timer {
     start(minutes) {
         this.currentTime = minutes * 1000 * 60;
 
+        if (this.currentTimerId !== null) {
+            clearInterval(this.currentTimerId);
+        }
         this.currentTimerId = setInterval(() => {
             this.currentTime -= 1000;
             if (this.tickCallback !== null) this.tickCallback(this.currentTime);
