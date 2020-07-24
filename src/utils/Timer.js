@@ -25,4 +25,8 @@ export default class Timer {
             }
         }, this.updateRate);
     }
+
+    stop() {
+        if (this.currentTimerId !== null) clearInterval(this.currentTimerId);
+    }
 }
