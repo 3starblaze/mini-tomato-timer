@@ -1,7 +1,8 @@
 export default class Timer {
-    constructor(onStopCallback=null, tickCallback=null) {
+    constructor(onStopCallback=null, tickCallback=null, updateRate=100) {
         this.onStopCallback = onStopCallback;
         this.tickCallback = tickCallback;
+        this.updateRate = updateRate;
     }
 
     start(minutes) {
@@ -11,7 +12,7 @@ export default class Timer {
             clearInterval(this.currentTimerId);
         }
         this.currentTimerId = setInterval(() => {
-            this.currentTime -= 1000;
+            this.currentTime -= this.updateRate;
             if (this.tickCallback !== null) this.tickCallback(this.currentTime);
 
             if (this.currentTime <= 0) {
@@ -22,6 +23,6 @@ export default class Timer {
                     this.onStopCallback();
                 }
             }
-        }, 1000);
+        }, this.updateRate);
     }
 }
