@@ -2,8 +2,8 @@
     <div>
         <div class="display-bar">
             <span class="timer">{{ formattedTime }}</span>
-            <span class="play">&#9654;</span>
-            <span class="stop">&#9209;</span>
+            <span class="play" @click="play">&#9654;</span>
+            <span class="stop" @click="stop">&#9209;</span>
         </div>
         <div class="mode-bar">
             <button id="session-button"
