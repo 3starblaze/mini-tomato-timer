@@ -35,7 +35,7 @@ export default class Timer {
     }
 
     play() {
-        this.scheduleTick();
+        if (typeof this.currentTime !== "undefined") this.scheduleTick();
     }
 
     stop() {
