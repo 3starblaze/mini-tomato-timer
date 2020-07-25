@@ -2,10 +2,10 @@
     <div>
         <div class="display-bar">
             <span class="timer">{{ formattedTime }}</span>
-            <button class="play">
+            <button class="play" @click="play">
                 <PlayButton></PlayButton>
             </button>
-            <button class="stop">
+            <button class="stop" @click="stop">
                 <StopButton></StopButton>
             </button>
         </div>

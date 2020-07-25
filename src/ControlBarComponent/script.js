@@ -2,6 +2,7 @@ import tmpBeepSound from '../assets/crappy_beep.mp3';
 const beepSound = new Audio(tmpBeepSound);
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
+import Timer from '../utils/Timer';
 
 export default {
     name: 'ControlBar',
@@ -11,10 +12,13 @@ export default {
     },
     data: () => ({
         currentTime: 25 * 1000 * 60,
-        currentTimerId: null,
+        timer: null,
         notificationPermission: Notification.permission,
         activeButton: null,
     }),
+    created() {
+        this.timer = new Timer(this.onTickEnd, this.updateTime);
+    },
     computed: {
         formattedTime: function() {
             let minutes = String(Math.floor(this.currentTime / 1000 / 60))
@@ -31,19 +35,7 @@ export default {
             this.beep();
         },
         startTicking: function(minutes) {
-            this.currentTime = minutes * 1000 * 60;
-            if (this.currentTimerId) clearInterval(this.currentTimerId);
-
-            this.currentTimerId = setInterval(() => {
-                this.currentTime -= 1000;
-
-                if (this.currentTime <= 0) {
-                    this.currentTime = 0;
-                    clearInterval(this.currentTimerId);
-                    this.currentTimerId = null;
-                    this.onTickEnd();
-                }
-            }, 1000);
+            this.timer.start(minutes);
         },
         askNotification: function() {
             Notification.requestPermission().then(function(result) {
@@ -72,6 +64,15 @@ export default {
         longBreakTick() {
             this.startTicking(10);
             this.activeButton = 'longBreak';
+        },
+        updateTime(time) {
+            this.currentTime = time;
+        },
+        play() {
+            this.timer.play();
+        },
+        stop() {
+            this.timer.stop();
         }
     },
 }
