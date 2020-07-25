@@ -26,3 +26,12 @@
         }
     }
 }
+
+.play, .stop {
+    border: none;
+    svg {
+        height: 2em;
+        width: 2em;
+        fill: $light;
+    }
+}
