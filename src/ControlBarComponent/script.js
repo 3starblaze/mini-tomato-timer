@@ -61,6 +61,12 @@ export default {
         },
         updateTime(time) {
             this.currentTime = time;
+        },
+        play() {
+            this.timer.play();
+        },
+        stop() {
+            this.timer.stop();
         }
     },
 }
