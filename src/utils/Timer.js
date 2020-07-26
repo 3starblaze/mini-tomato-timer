@@ -17,7 +17,6 @@ export default class Timer {
 
         this.currentTimerId = setInterval(() => {
             this.currentTime -= this.updateRate;
-            if (this.tickCallback !== null) this.tickCallback(this.currentTime);
 
             if (this.currentTime <= 0) {
                 this.currentTime = 0;
@@ -26,6 +25,8 @@ export default class Timer {
                     this.onStopCallback();
                 }
             }
+
+            if (this.tickCallback !== null) this.tickCallback(this.currentTime);
         }, this.updateRate);
     }
 
@@ -35,7 +36,7 @@ export default class Timer {
     }
 
     play() {
-        this.scheduleTick();
+        if (typeof this.currentTime !== "undefined") this.scheduleTick();
     }
 
     stop() {
