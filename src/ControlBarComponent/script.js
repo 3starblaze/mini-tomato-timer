@@ -23,9 +23,9 @@ export default {
   computed: {
     formattedTime() {
       let minutes = String(Math.floor(this.currentTime / 1000 / 60));
-      minutes = (minutes.length == 1 ? '0' : '') + minutes;
-      let seconds = String(Math.floor(this.currentTime / 1000 % 60));
-      seconds = (seconds.length == 1 ? '0' : '') + seconds;
+      minutes = (minutes.length === 1 ? '0' : '') + minutes;
+      let seconds = String(Math.floor((this.currentTime / 1000) % 60));
+      seconds = (seconds.length === 1 ? '0' : '') + seconds;
       return `${minutes}:${seconds}`;
     },
   },
@@ -39,7 +39,7 @@ export default {
       this.timer.start(minutes);
     },
     askNotification() {
-      Notification.requestPermission().then(function (result) {
+      Notification.requestPermission().then(function setPermission(result) {
         this.notificationPermission = result;
       });
     },
@@ -50,7 +50,7 @@ export default {
       beepSound.onended = () => {
         if (timesBeeped < timesToBeep) {
           beepSound.play();
-          timesBeeped++;
+          timesBeeped += 1;
         }
       };
     },

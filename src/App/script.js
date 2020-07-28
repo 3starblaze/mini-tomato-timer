@@ -1,4 +1,4 @@
-import bus from '../bus.js';
+import bus from '../bus';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
