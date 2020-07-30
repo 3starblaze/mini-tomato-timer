@@ -15,6 +15,12 @@ export default {
             });
         });
     },
+    mounted() {
+        // Global key press handler
+        window.addEventListener('keypress', (e) => {
+            if (e.key === 'p') this.pureView = !this.pureView;
+        });
+    },
     data: () => ({
         notificationPermission: Notification.permission,
         pureView: false,
