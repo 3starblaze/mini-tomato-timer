@@ -39,3 +39,11 @@ button.active {
     color: $dark;
     background: $light;
 }
+
+.pure-view-container {
+    visibility: hidden;
+}
+
+.pure-item {
+    visibility: visible;
+}

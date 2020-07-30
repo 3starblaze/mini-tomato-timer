@@ -17,6 +17,7 @@ export default {
     },
     data: () => ({
         notificationPermission: Notification.permission,
+        pureView: false,
     }),
     watch: {
         notificationPermission: function(newPermission) {
