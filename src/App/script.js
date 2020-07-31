@@ -18,16 +18,21 @@ export default {
     mounted() {
         // Global key press handler
         window.addEventListener('keypress', (e) => {
-            if (e.key === 'p') this.pureView = !this.pureView;
+            if (e.key === this.pureViewShortcut) this.pureView = !this.pureView;
         });
+        bus.$emit('pureViewShortcutChange', this.pureViewShortcut);
     },
     data: () => ({
         notificationPermission: Notification.permission,
         pureView: false,
+        pureViewShortcut: 'p',
     }),
     watch: {
         notificationPermission: function(newPermission) {
             bus.$emit('notificationChange', newPermission);
+        },
+        pureViewShortcut: function(newPureViewShortcut) {
+            bus.$emit('pureViewShortcutChange', newPureViewShortcut);
         }
     },
 }
