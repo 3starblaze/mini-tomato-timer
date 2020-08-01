@@ -15,12 +15,24 @@ export default {
       });
     });
   },
+  mounted() {
+    // Global key press handler
+    window.addEventListener('keypress', (e) => {
+      if (e.key === this.pureViewShortcut) this.pureView = !this.pureView;
+    });
+    bus.$emit('pureViewShortcutChange', this.pureViewShortcut);
+  },
   data: () => ({
     notificationPermission: Notification.permission,
+    pureView: false,
+    pureViewShortcut: 'p',
   }),
   watch: {
     notificationPermission(newPermission) {
       bus.$emit('notificationChange', newPermission);
+    },
+    pureViewShortcut(newPureViewShortcut) {
+      bus.$emit('pureViewShortcutChange', newPureViewShortcut);
     },
   },
 };

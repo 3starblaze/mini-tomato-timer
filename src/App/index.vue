@@ -1,5 +1,5 @@
 <template>
-    <div id="main">
+    <div id="main" :class="{ 'pure-view-container': pureView }">
         <settings id="corner-bar"></settings>
         <control-bar id="center"></control-bar>
     </div>

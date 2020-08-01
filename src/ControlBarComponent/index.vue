@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="display-bar">
-            <span class="timer">{{ formattedTime }}</span>
+            <span class="timer pure-item">{{ formattedTime }}</span>
             <button class="play" @click="play">
                 <PlayButton></PlayButton>
             </button>

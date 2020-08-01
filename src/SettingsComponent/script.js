@@ -5,10 +5,14 @@ export default {
   data: () => ({
     visible: false,
     notificationPermission: Notification.permission,
+    pureViewShortcut: null,
   }),
   created() {
     bus.$on('notificationChange', (value) => {
       this.notificationPermission = value;
+    });
+    bus.$on('pureViewShortcutChange', (value) => {
+      this.pureViewShortcut = value;
     });
   },
   methods: {
