@@ -2,10 +2,10 @@ import Vue from 'vue';
 
 import AppComponent from './App/index.vue';
 
-var vm = new Vue({
-    el: "#app",
-    components: {
-        app: AppComponent,
-    },
-    render: h => h('app'),
-})
+new Vue({
+  el: '#app',
+  components: {
+    app: AppComponent,
+  },
+  render: (h) => h('app'),
+});
