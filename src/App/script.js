@@ -31,8 +31,8 @@ export default {
     notificationPermission(newPermission) {
       bus.$emit('notificationChange', newPermission);
     },
-    pureViewShortcut: function(newPureViewShortcut) {
-        bus.$emit('pureViewShortcutChange', newPureViewShortcut);
+    pureViewShortcut(newPureViewShortcut) {
+      bus.$emit('pureViewShortcutChange', newPureViewShortcut);
     },
   },
 };
