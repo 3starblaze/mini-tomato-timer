@@ -1,4 +1,4 @@
-import tmpBeepSound from '../assets/crappy_beep.mp3';
+import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
 import Timer from '../utils/Timer';
