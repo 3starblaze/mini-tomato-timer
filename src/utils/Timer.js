@@ -1,45 +1,40 @@
 export default class Timer {
-  constructor(onStopCallback = null, tickCallback = null, updateRate = 100) {
-    this.onStopCallback = onStopCallback;
-    this.tickCallback = tickCallback;
-    this.updateRate = updateRate;
+  constructor(onStopCallback = null, tickCallback = null, tickRate = 100) {
+    this._onStopCallback = onStopCallback;
+    this._tickCallback = tickCallback;
+    this._tickRate = tickRate;
+    this._currentTickerId = null;
+    this._stopTime = null;
   }
 
-  clearTimer() {
-    if (this.currentTimerId !== null) {
-      clearInterval(this.currentTimerId);
-      this.currentTimerId = null;
+  _stopTick() {
+    if (this._currentTickerId !== null) {
+      clearInterval(this._currentTickerId);
+      this._currentTickerId = null;
     }
   }
 
-  scheduleTick() {
-    this.clearTimer();
+  _startTick() {
+    this._stopTick();
 
-    this.currentTimerId = setInterval(() => {
-      this.currentTime -= this.updateRate;
-
+    this._currentTickerId = setInterval(() => {
       if (this.currentTime <= 0) {
-        this.currentTime = 0;
-        this.clearTimer();
-        if (this.onStopCallback !== null) {
-          this.onStopCallback();
+        this._stopTick();
+        if (this._onStopCallback !== null) {
+          this._onStopCallback();
         }
       }
 
-      if (this.tickCallback !== null) this.tickCallback(this.currentTime);
-    }, this.updateRate);
+      if (this._tickCallback !== null) this._tickCallback(this.currentTime);
+    }, this._tickRate);
+  }
+
+  get currentTime() {
+    return this._stopTime - Date.now();
   }
 
   start(minutes) {
-    this.currentTime = minutes * 1000 * 60;
-    this.play();
-  }
-
-  play() {
-    if (typeof this.currentTime !== 'undefined') this.scheduleTick();
-  }
-
-  stop() {
-    this.clearTimer();
+    this._stopTime = Date.now() + minutes * 1000 * 60;
+    this._startTick();
   }
 }
