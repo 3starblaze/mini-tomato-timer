@@ -1,7 +1,7 @@
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
-import Timer from '../utils/Timer';
+import Timer from '../utils/Timer.ts';
 
 const beepSound = new Audio(tmpBeepSound);
 
