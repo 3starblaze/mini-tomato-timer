@@ -8,15 +8,19 @@ interface TickCallback {
 
 export default class Timer {
   _stopCallback: StopCallback;
+
   _tickCallback: TickCallback;
+
   _tickRate: number;
+
   _currentTickerId: number | null;
+
   _stopTime: number | null;
 
   constructor(
     stopCallback: StopCallback = null,
     tickCallback: TickCallback = null,
-    tickRate = 100
+    tickRate = 100,
   ) {
     this._stopCallback = stopCallback;
     this._tickCallback = tickCallback;
@@ -51,7 +55,7 @@ export default class Timer {
     return this._stopTime - Date.now();
   }
 
-  start(minutes: number) {
+  start(minutes: number): void {
     this._stopTime = Date.now() + minutes * 1000 * 60;
     this._startTick();
   }
