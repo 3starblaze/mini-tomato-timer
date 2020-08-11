@@ -13,5 +13,14 @@ module.exports = {
     "rules": {
         "no-new": 0,
         "no-underscore-dangle": 0
-    }
+    },
+    "overrides": [
+        {
+            "files": "*.ts",
+            plugins: [
+                "@typescript-eslint",
+            ],
+            "extends": "plugin:@typescript-eslint/recommended",
+        },
+    ],
 };
