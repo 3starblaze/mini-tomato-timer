@@ -18,7 +18,7 @@ export default {
     activeButton: null,
   }),
   created() {
-    this.timer = new Timer(this.onTickEnd, this.updateTime);
+    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime);
   },
   computed: {
     formattedTime() {

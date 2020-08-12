@@ -17,11 +17,15 @@ export default class Timer {
 
   _stopTime: number | null;
 
+  _frozenCurrentTime: number;
+
   constructor(
+    currentTime: number,
     stopCallback: StopCallback | null = null,
     tickCallback: TickCallback | null = null,
     tickRate = 100,
   ) {
+    this._frozenCurrentTime = currentTime;
     this._stopCallback = stopCallback;
     this._tickCallback = tickCallback;
     this._tickRate = tickRate;
@@ -52,7 +56,10 @@ export default class Timer {
   }
 
   get currentTime(): number {
-    return this._stopTime - Date.now();
+    if (typeof this._stopTime === 'number') {
+      return this._stopTime - Date.now();
+    }
+    return this._frozenCurrentTime;
   }
 
   start(minutes: number): void {
