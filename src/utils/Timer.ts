@@ -7,9 +7,9 @@ interface TickCallback {
 }
 
 export default class Timer {
-  _stopCallback: StopCallback;
+  _stopCallback: StopCallback | null;
 
-  _tickCallback: TickCallback;
+  _tickCallback: TickCallback | null;
 
   _tickRate: number;
 
@@ -18,8 +18,8 @@ export default class Timer {
   _stopTime: number | null;
 
   constructor(
-    stopCallback: StopCallback = null,
-    tickCallback: TickCallback = null,
+    stopCallback: StopCallback | null = null,
+    tickCallback: TickCallback | null = null,
     tickRate = 100,
   ) {
     this._stopCallback = stopCallback;
