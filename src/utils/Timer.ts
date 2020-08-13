@@ -59,7 +59,8 @@ export default class Timer {
 
   get currentTime(): number {
     if (this._playState === 'playing' && this._stopTime !== null) {
-      this._frozenCurrentTime = this._stopTime - Date.now();
+      const calculatedTime = this._stopTime - Date.now();
+      this._frozenCurrentTime = calculatedTime >= 0 ? calculatedTime : 0;
     }
     return this._frozenCurrentTime;
   }
