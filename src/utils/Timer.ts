@@ -19,6 +19,8 @@ export default class Timer {
 
   _frozenCurrentTime: number;
 
+  _playState: 'playing' | 'stopped';
+
   constructor(
     currentTime: number,
     stopCallback: StopCallback | null = null,
@@ -31,6 +33,7 @@ export default class Timer {
     this._tickRate = tickRate;
     this._currentTickerId = null;
     this._stopTime = null;
+    this._playState = 'stopped';
   }
 
   _stopTick(): void {
@@ -50,20 +53,39 @@ export default class Timer {
           this._stopCallback();
         }
       }
-
       if (this._tickCallback !== null) this._tickCallback(this.currentTime);
     }, this._tickRate);
   }
 
   get currentTime(): number {
-    if (typeof this._stopTime === 'number') {
-      return this._stopTime - Date.now();
+    if (this._playState === 'playing' && this._stopTime !== null) {
+      this._frozenCurrentTime = this._stopTime - Date.now();
     }
     return this._frozenCurrentTime;
   }
 
-  start(minutes: number): void {
-    this._stopTime = Date.now() + minutes * 1000 * 60;
+  set currentTime(ms: number) {
+    if (typeof ms !== 'number') {
+      throw new Error('`currentTime` is not a number!');
+    }
+    this._frozenCurrentTime = ms;
+  }
+
+  play(): void {
+    if (this._playState === 'playing') return;
+    this._stopTime = Date.now() + this._frozenCurrentTime;
+    this._playState = 'playing';
     this._startTick();
+  }
+
+  stop(): void {
+    if (this._playState === 'stopped') return;
+    this._playState = 'stopped';
+    this._stopTick();
+  }
+
+  reset(ms: number): void {
+    this.stop();
+    this.currentTime = ms;
   }
 }
