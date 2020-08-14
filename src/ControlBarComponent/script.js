@@ -18,7 +18,7 @@ export default {
     activeButton: null,
   }),
   created() {
-    this.timer = new Timer(this.onTickEnd, this.updateTime);
+    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime);
   },
   computed: {
     formattedTime() {
@@ -35,8 +35,9 @@ export default {
       new Notification('Time is over!');
       this.beep();
     },
-    startTicking(minutes) {
-      this.timer.start(minutes);
+    startTicking(ms) {
+      this.timer.reset(ms);
+      this.play();
     },
     askNotification() {
       Notification.requestPermission().then(function setPermission(result) {
@@ -55,15 +56,15 @@ export default {
       };
     },
     sessionTick() {
-      this.startTicking(25);
+      this.startTicking(25 * 1000 * 60);
       this.activeButton = 'session';
     },
     shortBreakTick() {
-      this.startTicking(5);
+      this.startTicking(5 * 1000 * 60);
       this.activeButton = 'shortBreak';
     },
     longBreakTick() {
-      this.startTicking(10);
+      this.startTicking(10 * 1000 * 60);
       this.activeButton = 'longBreak';
     },
     updateTime(time) {

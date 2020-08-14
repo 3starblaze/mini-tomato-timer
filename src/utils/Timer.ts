@@ -7,9 +7,9 @@ interface TickCallback {
 }
 
 export default class Timer {
-  _stopCallback: StopCallback;
+  _stopCallback: StopCallback | null;
 
-  _tickCallback: TickCallback;
+  _tickCallback: TickCallback | null;
 
   _tickRate: number;
 
@@ -17,16 +17,23 @@ export default class Timer {
 
   _stopTime: number | null;
 
+  _frozenCurrentTime: number;
+
+  _playState: 'playing' | 'stopped';
+
   constructor(
-    stopCallback: StopCallback = null,
-    tickCallback: TickCallback = null,
+    currentTime: number,
+    stopCallback: StopCallback | null = null,
+    tickCallback: TickCallback | null = null,
     tickRate = 100,
   ) {
+    this._frozenCurrentTime = currentTime;
     this._stopCallback = stopCallback;
     this._tickCallback = tickCallback;
     this._tickRate = tickRate;
     this._currentTickerId = null;
     this._stopTime = null;
+    this._playState = 'stopped';
   }
 
   _stopTick(): void {
@@ -46,17 +53,40 @@ export default class Timer {
           this._stopCallback();
         }
       }
-
       if (this._tickCallback !== null) this._tickCallback(this.currentTime);
     }, this._tickRate);
   }
 
   get currentTime(): number {
-    return this._stopTime - Date.now();
+    if (this._playState === 'playing' && this._stopTime !== null) {
+      const calculatedTime = this._stopTime - Date.now();
+      this._frozenCurrentTime = calculatedTime >= 0 ? calculatedTime : 0;
+    }
+    return this._frozenCurrentTime;
   }
 
-  start(minutes: number): void {
-    this._stopTime = Date.now() + minutes * 1000 * 60;
+  set currentTime(ms: number) {
+    if (typeof ms !== 'number') {
+      throw new Error('`currentTime` is not a number!');
+    }
+    this._frozenCurrentTime = ms;
+  }
+
+  play(): void {
+    if (this._playState === 'playing') return;
+    this._stopTime = Date.now() + this._frozenCurrentTime;
+    this._playState = 'playing';
     this._startTick();
+  }
+
+  stop(): void {
+    if (this._playState === 'stopped') return;
+    this._playState = 'stopped';
+    this._stopTick();
+  }
+
+  reset(ms: number): void {
+    this.stop();
+    this.currentTime = ms;
   }
 }
