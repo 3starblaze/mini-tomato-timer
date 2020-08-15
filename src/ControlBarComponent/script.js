@@ -5,6 +5,8 @@ import Timer from '../utils/Timer.ts';
 
 const beepSound = new Audio(tmpBeepSound);
 
+const minutesToMs = (minutes) => minutes * 60000;
+
 export default {
   name: 'ControlBar',
   components: {
@@ -56,15 +58,15 @@ export default {
       };
     },
     sessionTick() {
-      this.startTicking(25 * 1000 * 60);
+      this.startTicking(minutesToMs(25));
       this.activeButton = 'session';
     },
     shortBreakTick() {
-      this.startTicking(5 * 1000 * 60);
+      this.startTicking(minutesToMs(5));
       this.activeButton = 'shortBreak';
     },
     longBreakTick() {
-      this.startTicking(10 * 1000 * 60);
+      this.startTicking(minutesToMs(10));
       this.activeButton = 'longBreak';
     },
     updateTime(time) {
