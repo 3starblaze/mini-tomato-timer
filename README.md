@@ -1,7 +1,7 @@
 # mini tomato timer
 ![](./readme-assets/mini-tomato-timer-preview.png)
 
-Simple and minimal pomodoro timer.
+<p align="center">Simple and minimal pomodoro timer</p>
 
 # Installation
 ```bash
