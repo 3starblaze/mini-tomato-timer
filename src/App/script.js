@@ -1,4 +1,5 @@
 import bus from '../bus';
+import globalData from '../globalData';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
@@ -11,28 +12,19 @@ export default {
   created() {
     bus.$on('askNotification', () => {
       Notification.requestPermission().then((result) => {
-        this.notificationPermission = result;
+        this.globalData.notificationPermission = result;
       });
     });
   },
   mounted() {
     // Global key press handler
     window.addEventListener('keypress', (e) => {
-      if (e.key === this.pureViewShortcut) this.pureView = !this.pureView;
+      if (e.key === this.globalData.pureViewShortcut) {
+        this.globalData.pureView = !this.globalData.pureView;
+      }
     });
-    bus.$emit('pureViewShortcutChange', this.pureViewShortcut);
   },
   data: () => ({
-    notificationPermission: Notification.permission,
-    pureView: false,
-    pureViewShortcut: 'p',
+    globalData,
   }),
-  watch: {
-    notificationPermission(newPermission) {
-      bus.$emit('notificationChange', newPermission);
-    },
-    pureViewShortcut(newPureViewShortcut) {
-      bus.$emit('pureViewShortcutChange', newPureViewShortcut);
-    },
-  },
 };

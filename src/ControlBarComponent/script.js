@@ -1,3 +1,4 @@
+import globalData from '../globalData';
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
@@ -20,9 +21,9 @@ export default {
     StopButton,
   },
   data: () => ({
+    globalData,
     currentTime: 25 * 1000 * 60,
     timer: null,
-    notificationPermission: Notification.permission,
     activeButton: null,
   }),
   created() {
@@ -49,7 +50,7 @@ export default {
     },
     askNotification() {
       Notification.requestPermission().then(function setPermission(result) {
-        this.notificationPermission = result;
+        this.globalData.notificationPermission = result;
       });
     },
     beep() {
