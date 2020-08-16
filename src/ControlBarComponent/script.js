@@ -7,6 +7,12 @@ const beepSound = new Audio(tmpBeepSound);
 
 const minutesToMs = (minutes) => minutes * 60000;
 
+const timerModeTime = {
+  session: minutesToMs(25),
+  shortBreak: minutesToMs(5),
+  longBreak: minutesToMs(10),
+};
+
 export default {
   name: 'ControlBar',
   components: {
@@ -57,17 +63,9 @@ export default {
         }
       };
     },
-    sessionTick() {
-      this.startTicking(minutesToMs(25));
-      this.activeButton = 'session';
-    },
-    shortBreakTick() {
-      this.startTicking(minutesToMs(5));
-      this.activeButton = 'shortBreak';
-    },
-    longBreakTick() {
-      this.startTicking(minutesToMs(10));
-      this.activeButton = 'longBreak';
+    switchTimerMode(timerMode) {
+      this.activeButton = timerMode;
+      this.startTicking(timerModeTime[timerMode]);
     },
     updateTime(time) {
       this.currentTime = time;

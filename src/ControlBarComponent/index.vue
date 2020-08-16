@@ -11,15 +11,15 @@
         </div>
         <div class="mode-bar">
             <button id="session-button"
-                    @click="sessionTick"
+                    @click="switchTimerMode('session')"
                     :class="{ active: activeButton === 'session' }"
             >Session</button>
             <button id="short-break-button"
-                    @click="shortBreakTick"
+                    @click="switchTimerMode('shortBreak')"
                     :class="{ active: activeButton === 'shortBreak' }"
             >Short Break</button>
             <button id="long-break-button"
-                    @click="longBreakTick"
+                    @click="switchTimerMode('longBreak')"
                     :class="{ active: activeButton === 'longBreak' }"
             >Long Break</button>
         </div>
