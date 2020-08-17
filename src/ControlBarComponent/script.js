@@ -1,9 +1,18 @@
+import globalData from '../globalData';
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
 import Timer from '../utils/Timer.ts';
 
 const beepSound = new Audio(tmpBeepSound);
+
+const minutesToMs = (minutes) => minutes * 60000;
+
+const timerModeTime = {
+  session: minutesToMs(25),
+  shortBreak: minutesToMs(5),
+  longBreak: minutesToMs(10),
+};
 
 export default {
   name: 'ControlBar',
@@ -12,9 +21,9 @@ export default {
     StopButton,
   },
   data: () => ({
+    globalData,
     currentTime: 25 * 1000 * 60,
     timer: null,
-    notificationPermission: Notification.permission,
     activeButton: null,
   }),
   created() {
@@ -41,7 +50,7 @@ export default {
     },
     askNotification() {
       Notification.requestPermission().then(function setPermission(result) {
-        this.notificationPermission = result;
+        this.globalData.notificationPermission = result;
       });
     },
     beep() {
@@ -55,17 +64,9 @@ export default {
         }
       };
     },
-    sessionTick() {
-      this.startTicking(25 * 1000 * 60);
-      this.activeButton = 'session';
-    },
-    shortBreakTick() {
-      this.startTicking(5 * 1000 * 60);
-      this.activeButton = 'shortBreak';
-    },
-    longBreakTick() {
-      this.startTicking(10 * 1000 * 60);
-      this.activeButton = 'longBreak';
+    switchTimerMode(timerMode) {
+      this.activeButton = timerMode;
+      this.startTicking(timerModeTime[timerMode]);
     },
     updateTime(time) {
       this.currentTime = time;
