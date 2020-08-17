@@ -27,4 +27,9 @@ export default {
   data: () => ({
     globalData,
   }),
+  watch: {
+    'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
+      document.title = newDocumentTitle;
+    },
+  },
 };
