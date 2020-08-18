@@ -3,6 +3,8 @@ import globalData from '../globalData';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
+import defaultFavicon from '../assets/mtm-favicon.png';
+
 export default {
   name: 'App',
   components: {
@@ -15,6 +17,7 @@ export default {
         this.globalData.notificationPermission = result;
       });
     });
+    this.changeFavicon(defaultFavicon);
   },
   mounted() {
     // Global key press handler
@@ -30,6 +33,15 @@ export default {
   watch: {
     'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
       document.title = newDocumentTitle;
+    },
+  },
+  methods: {
+    changeFavicon(iconObject) {
+      const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+      link.type = 'image/x-icon';
+      link.rel = 'shortcut icon';
+      link.href = iconObject;
+      document.getElementsByTagName('head')[0].appendChild(link);
     },
   },
 };
