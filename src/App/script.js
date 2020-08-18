@@ -4,6 +4,8 @@ import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
 import defaultFavicon from '../assets/mtm-favicon.png';
+import playingFavicon from '../assets/mtm-favicon-playing.png';
+import stoppedFavicon from '../assets/mtm-favicon-stopped.png';
 
 export default {
   name: 'App',
@@ -33,6 +35,18 @@ export default {
   watch: {
     'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
       document.title = newDocumentTitle;
+    },
+    'globalData.faviconType': function faviconTypeWatcher(newFaviconType) {
+      switch (newFaviconType) {
+        case 'playing':
+          this.changeFavicon(playingFavicon);
+          break;
+        case 'stopped':
+          this.changeFavicon(stoppedFavicon);
+          break;
+        default:
+          this.changeFavicon(defaultFavicon);
+      }
     },
   },
   methods: {

@@ -75,9 +75,11 @@ export default {
       this.currentTime = time;
     },
     play() {
+      this.globalData.faviconType = 'playing';
       this.timer.play();
     },
     stop() {
+      this.globalData.faviconType = 'stopped';
       this.timer.stop();
     },
   },

@@ -3,4 +3,5 @@ export default {
   pureView: false,
   pureViewShortcut: 'p',
   documentTitle: '',
+  faviconType: 'default', // 'default' | 'playing' | 'stopped'
 };
