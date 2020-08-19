@@ -40,6 +40,15 @@ button.active {
     background: $light;
 }
 
+button.warning {
+    &::before {
+        content: "!!! ";
+    }
+    &::after {
+        content: " !!!";
+    }
+}
+
 .pure-view-container {
     visibility: hidden;
 }

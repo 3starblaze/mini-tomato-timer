@@ -35,7 +35,10 @@ export default {
       minutes = (minutes.length === 1 ? '0' : '') + minutes;
       let seconds = String(Math.floor((this.currentTime / 1000) % 60));
       seconds = (seconds.length === 1 ? '0' : '') + seconds;
-      return `${minutes}:${seconds}`;
+
+      const formattedTime = `${minutes}:${seconds}`;
+      this.globalData.documentTitle = formattedTime;
+      return formattedTime;
     },
   },
   methods: {
@@ -72,9 +75,11 @@ export default {
       this.currentTime = time;
     },
     play() {
+      this.globalData.faviconType = 'playing';
       this.timer.play();
     },
     stop() {
+      this.globalData.faviconType = 'stopped';
       this.timer.stop();
     },
   },

@@ -30,7 +30,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(mp3|wav)$/,
+        test: /\.(mp3|wav|png)$/,
         include: path.resolve(__dirname, 'src/assets'),
         loader: 'file-loader',
       },
