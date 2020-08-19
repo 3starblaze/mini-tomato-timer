@@ -14,5 +14,8 @@ export default {
     askNotification() {
       bus.$emit('askNotification');
     },
+    notificationIsEnabled() {
+      return globalData.notificationPermission === 'granted';
+    },
   },
 };

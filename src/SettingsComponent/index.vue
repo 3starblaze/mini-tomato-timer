@@ -2,12 +2,12 @@
     <div>
         <button
             @click="toggleVisibility"
-            :class="{ active: visible, warning: globalData.notificationPermission != 'granted' }"
+            :class="{ active: visible, warning: !notificationIsEnabled() }"
         >
             Settings
         </button>
         <ul class="popup" :class="{ visible }">
-            <li v-if="globalData.notificationPermission !='granted'">
+            <li v-if="!notificationIsEnabled()">
                 Notifications are not enabled for this site.
                 <button @click="askNotification">Enable notifications</button>
             </li>
