@@ -1,6 +1,11 @@
 <template>
     <div>
-        <button @click="toggleVisibility" :class="{ active: visible }">Settings</button>
+        <button
+            @click="toggleVisibility"
+            :class="{ active: visible, warning: globalData.notificationPermission != 'granted' }"
+        >
+            Settings
+        </button>
         <ul class="popup" :class="{ visible }">
             <li v-if="globalData.notificationPermission !='granted'">
                 Notifications are not enabled for this site.
