@@ -46,6 +46,7 @@ export default {
       this.activeButton = null;
       new Notification('Time is over!');
       this.beep();
+      this.globalData.faviconType = 'stopped';
     },
     startTicking(ms) {
       this.timer.reset(ms);
