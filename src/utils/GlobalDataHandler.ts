@@ -7,7 +7,6 @@ export default class GlobalDataHandler {
 
   constructor() {
     const currentInstanceString = GlobalDataHandler._currentInstance ? GlobalDataHandler._currentInstance.toString : 'null';
-    console.log(`this currentInstance is ${currentInstanceString}`);
     if (GlobalDataHandler._currentInstance) return GlobalDataHandler._currentInstance;
     this.data = globalData;
     this.readPersistent();

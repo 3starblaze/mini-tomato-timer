@@ -35,8 +35,11 @@ export default {
     globalData: null,
   }),
   watch: {
-    globalData: function globalDataWatcher() {
-      this.CurrentGlobalDataHandler.updatePersistent();
+    globalData: {
+      handler: function globalDataWatcher() {
+        this.CurrentGlobalDataHandler.updatePersistent();
+      },
+      deep: true,
     },
     'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
       document.title = newDocumentTitle;
