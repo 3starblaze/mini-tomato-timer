@@ -1,10 +1,17 @@
-import globalData from '../globalData';
+import globalData from '../globalData.ts';
 
 export default class GlobalDataHandler {
-  data: unknown;
+  private static _currentInstance: GlobalDataHandler | null = null;
+
+  data: any;
 
   constructor() {
+    const currentInstanceString = GlobalDataHandler._currentInstance ? GlobalDataHandler._currentInstance.toString : 'null';
+    console.log(`this currentInstance is ${currentInstanceString}`);
+    if (GlobalDataHandler._currentInstance) return GlobalDataHandler._currentInstance;
     this.data = globalData;
+    this.readPersistent();
+    GlobalDataHandler._currentInstance = this;
   }
 
   updatePersistent(): void {
@@ -12,7 +19,9 @@ export default class GlobalDataHandler {
   }
 
   readPersistent(): void {
-    const readData = JSON.parse(window.localStorage.getItem('globalData'));
+    const readData: any = JSON.parse(
+      localStorage.getItem('globalData') || '{}',
+    );
     this.data = { ...this.data, ...readData };
   }
 }

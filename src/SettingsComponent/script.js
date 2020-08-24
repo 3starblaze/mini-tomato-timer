@@ -1,4 +1,4 @@
-import globalData from '../globalData';
+import globalData from '../globalData.ts';
 import bus from '../bus';
 
 export default {

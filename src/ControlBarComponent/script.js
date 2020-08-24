@@ -1,4 +1,4 @@
-import globalData from '../globalData';
+import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
 import StopButton from '../assets/stop.svg';
@@ -21,12 +21,13 @@ export default {
     StopButton,
   },
   data: () => ({
-    globalData,
+    globalData: null,
     currentTime: 25 * 1000 * 60,
     timer: null,
     activeButton: null,
   }),
   created() {
+    this.globalData = (new GlobalDataHandler()).data;
     this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime);
   },
   computed: {
