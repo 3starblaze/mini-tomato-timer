@@ -5,6 +5,13 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
+  entry: {
+    main: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      './src/index.js',
+    ],
+  },
   module: {
     rules: [
       {
@@ -15,7 +22,7 @@ module.exports = {
       {
         test: /\.js/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loader: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.vue$/,
