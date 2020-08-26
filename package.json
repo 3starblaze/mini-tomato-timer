@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "npx webpack",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,8 @@
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.10",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
     "babel-loader": "^8.1.0",
@@ -25,6 +28,7 @@
     "eslint-plugin-import": "^2.22.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.4.2",
     "node-sass": "^4.14.1",
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^8.0.2",
