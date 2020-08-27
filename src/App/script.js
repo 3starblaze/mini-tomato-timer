@@ -1,5 +1,5 @@
 import bus from '../bus';
-import globalData from '../globalData';
+import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
@@ -20,6 +20,7 @@ export default {
       });
     });
     this.changeFavicon(defaultFavicon);
+    this.globalData = this.CurrentGlobalDataHandler.data;
   },
   mounted() {
     // Global key press handler
@@ -30,9 +31,16 @@ export default {
     });
   },
   data: () => ({
-    globalData,
+    CurrentGlobalDataHandler: new GlobalDataHandler(),
+    globalData: null,
   }),
   watch: {
+    globalData: {
+      handler: function globalDataWatcher() {
+        this.CurrentGlobalDataHandler.updatePersistent();
+      },
+      deep: true,
+    },
     'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
       document.title = newDocumentTitle;
     },
@@ -46,6 +54,7 @@ export default {
           break;
         default:
           this.changeFavicon(defaultFavicon);
+          break;
       }
     },
   },
