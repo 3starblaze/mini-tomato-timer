@@ -16,7 +16,15 @@ module.exports = {
     rules: [
       {
         test: /\.ts/,
-        use: ['ts-loader', 'eslint-loader'],
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
+      {
+        test: /\.ts/,
+        loader: 'eslint-loader',
         exclude: /node_modules/,
       },
       {

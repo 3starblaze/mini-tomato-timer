@@ -1,5 +1,5 @@
 import globalData from '../globalData.ts';
-import bus from '../bus';
+import bus from '../bus.ts';
 
 export default {
   name: 'Settings',

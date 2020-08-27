@@ -1,4 +1,4 @@
-import bus from '../bus';
+import bus from '../bus.ts';
 import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
