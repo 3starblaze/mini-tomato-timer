@@ -9,7 +9,7 @@ module.exports = {
     main: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      './src/index.js',
+      './src/index.ts',
     ],
   },
   module: {
