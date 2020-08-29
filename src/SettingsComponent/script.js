@@ -1,10 +1,10 @@
-import globalData from '../globalData.ts';
+import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import bus from '../bus.ts';
 
 export default {
   name: 'Settings',
   data: () => ({
-    globalData,
+    globalData: GlobalDataHandler.data,
     visible: false,
   }),
   methods: {
@@ -15,7 +15,7 @@ export default {
       bus.$emit('askNotification');
     },
     notificationIsEnabled() {
-      return globalData.notificationPermission === 'granted';
+      return this.globalData.notificationPermission === 'granted';
     },
   },
 };
