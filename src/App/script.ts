@@ -13,7 +13,7 @@ export default {
     settings: SettingsComponent,
     'control-bar': ControlBarComponent,
   },
-  created() {
+  created(): void {
     bus.$on('askNotification', () => {
       Notification.requestPermission().then((result) => {
         this.globalData.notificationPermission = result;
@@ -22,7 +22,7 @@ export default {
     this.changeFavicon(defaultFavicon);
     this.globalData = this.CurrentGlobalDataHandler.data;
   },
-  mounted() {
+  mounted(): void {
     // Global key press handler
     window.addEventListener('keypress', (e) => {
       if (e.key === this.globalData.pureViewShortcut) {
@@ -36,15 +36,15 @@ export default {
   }),
   watch: {
     globalData: {
-      handler: function globalDataWatcher() {
+      handler: function globalDataWatcher(): void {
         this.CurrentGlobalDataHandler.updatePersistent();
       },
       deep: true,
     },
-    'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle) {
+    'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle: string): void {
       document.title = newDocumentTitle;
     },
-    'globalData.faviconType': function faviconTypeWatcher(newFaviconType) {
+    'globalData.faviconType': function faviconTypeWatcher(newFaviconType): void {
       switch (newFaviconType) {
         case 'playing':
           this.changeFavicon(playingFavicon);
@@ -59,7 +59,7 @@ export default {
     },
   },
   methods: {
-    changeFavicon(iconObject) {
+    changeFavicon(iconObject): void {
       const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
       link.type = 'image/x-icon';
       link.rel = 'shortcut icon';
