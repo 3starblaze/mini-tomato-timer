@@ -3,6 +3,8 @@ import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import SettingsComponent from '../SettingsComponent/index.vue';
 import ControlBarComponent from '../ControlBarComponent/index.vue';
 
+import { faviconString } from '../GlobalDefinitions.ts';
+
 import defaultFavicon from '../assets/mtm-favicon.png';
 import playingFavicon from '../assets/mtm-favicon-playing.png';
 import stoppedFavicon from '../assets/mtm-favicon-stopped.png';
@@ -44,7 +46,7 @@ export default {
     'globalData.documentTitle': function documentTitleWatcher(newDocumentTitle: string): void {
       document.title = newDocumentTitle;
     },
-    'globalData.faviconType': function faviconTypeWatcher(newFaviconType): void {
+    'globalData.faviconType': function faviconTypeWatcher(newFaviconType: faviconString): void {
       switch (newFaviconType) {
         case 'playing':
           this.changeFavicon(playingFavicon);
