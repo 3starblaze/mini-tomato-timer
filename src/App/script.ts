@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import bus from '../bus.ts';
 import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import SettingsComponent from '../SettingsComponent/index.vue';
