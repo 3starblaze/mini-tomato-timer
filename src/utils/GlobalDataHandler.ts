@@ -1,5 +1,3 @@
-import globalData from '../globalData.ts';
-
 export default class GlobalDataHandler {
   private static currentInstance: GlobalDataHandler | null = null;
 
@@ -7,7 +5,13 @@ export default class GlobalDataHandler {
 
   constructor() {
     if (GlobalDataHandler.currentInstance) return GlobalDataHandler.currentInstance;
-    this.data = globalData;
+    this.data = {
+      notificationPermission: Notification.permission,
+      pureView: false,
+      pureViewShortcut: 'p',
+      documentTitle: '',
+      faviconType: 'default', // 'default' | 'playing' | 'stopped'
+    };
     this.readPersistent();
     GlobalDataHandler.currentInstance = this;
   }

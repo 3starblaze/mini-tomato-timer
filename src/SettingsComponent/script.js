@@ -4,7 +4,7 @@ import bus from '../bus.ts';
 export default {
   name: 'Settings',
   data: () => ({
-    globalData: GlobalDataHandler.data,
+    globalData: (new GlobalDataHandler()).data,
     visible: false,
   }),
   methods: {
