@@ -9,7 +9,7 @@ import defaultFavicon from '../assets/mtm-favicon.png';
 import playingFavicon from '../assets/mtm-favicon-playing.png';
 import stoppedFavicon from '../assets/mtm-favicon-stopped.png';
 
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
     settings: SettingsComponent,
@@ -69,4 +69,4 @@ export default {
       document.getElementsByTagName('head')[0].appendChild(link);
     },
   },
-};
+});
