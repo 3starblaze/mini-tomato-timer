@@ -23,7 +23,6 @@ export default Vue.extend({
       });
     });
     this.changeFavicon(defaultFavicon);
-    this.globalData = this.CurrentGlobalDataHandler.data;
   },
   mounted(): void {
     // Global key press handler
@@ -35,7 +34,7 @@ export default Vue.extend({
   },
   data: () => ({
     CurrentGlobalDataHandler: new GlobalDataHandler(),
-    globalData: null,
+    globalData: (new GlobalDataHandler()).data,
   }),
   watch: {
     globalData: {
