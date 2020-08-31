@@ -10,6 +10,8 @@ import defaultFavicon from '../assets/mtm-favicon.png';
 import playingFavicon from '../assets/mtm-favicon-playing.png';
 import stoppedFavicon from '../assets/mtm-favicon-stopped.png';
 
+const faviconObject = [defaultFavicon, playingFavicon, stoppedFavicon];
+
 export default Vue.extend({
   name: 'App',
   components: {
@@ -61,8 +63,9 @@ export default Vue.extend({
     },
   },
   methods: {
-    changeFavicon(iconObject): void {
-      const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    changeFavicon(iconObject: any): void {
+      if (!faviconObject.includes(iconObject)) throw Error('Invalid favicon object');
+      const link: any = document.querySelector("link[rel*='icon']") || document.createElement('link');
       link.type = 'image/x-icon';
       link.rel = 'shortcut icon';
       link.href = iconObject;
