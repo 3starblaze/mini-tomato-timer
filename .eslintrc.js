@@ -21,6 +21,9 @@ module.exports = {
                 "@typescript-eslint",
             ],
             "extends": "plugin:@typescript-eslint/recommended",
+            rules: {
+                "@typescript-eslint/no-explicit-any": 0,
+            },
         },
     ],
 };
