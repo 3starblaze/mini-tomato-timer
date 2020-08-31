@@ -1,7 +1,8 @@
+import Vue from 'vue';
 import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import bus from '../bus.ts';
 
-export default {
+export default Vue.extend({
   name: 'Settings',
   data: () => ({
     globalData: (new GlobalDataHandler()).data,
@@ -18,4 +19,4 @@ export default {
       return this.globalData.notificationPermission === 'granted';
     },
   },
-};
+});

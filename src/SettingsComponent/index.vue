@@ -19,5 +19,5 @@
     </div>
 </template>
 
-<script src="./script.js"></script>
+<script src="./script.ts"></script>
 <style src="./style.scss" lang="scss" scoped></style>
