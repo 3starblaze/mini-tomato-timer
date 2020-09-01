@@ -7,7 +7,7 @@ import Timer from '../utils/Timer.ts';
 
 const beepSound = new Audio(tmpBeepSound);
 
-const minutesToMs = (minutes) => minutes * 60000;
+const minutesToMs = (minutes: number) => minutes * 60000;
 
 const timerModeTime = {
   session: minutesToMs(25),
@@ -22,14 +22,13 @@ export default Vue.extend({
     StopButton,
   },
   data: () => ({
-    globalData: null,
+    globalData: (new GlobalDataHandler()).data,
     currentTime: 25 * 1000 * 60,
-    timer: null,
+    timer: null as unknown as Timer,
     activeButton: null,
   }),
   created() {
-    this.globalData = (new GlobalDataHandler()).data;
-    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime);
+    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime) as Timer;
   },
   computed: {
     formattedTime() {
