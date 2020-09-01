@@ -9,6 +9,7 @@ const beepSound = new Audio(tmpBeepSound);
 
 const minutesToMs = (minutes: number) => minutes * 60000;
 
+type timerMode = 'session' | 'shortBreak' | 'longBreak' | null;
 const timerModeTime = {
   session: minutesToMs(25),
   shortBreak: minutesToMs(5),
@@ -25,7 +26,7 @@ export default Vue.extend({
     globalData: (new GlobalDataHandler()).data,
     currentTime: 25 * 1000 * 60,
     timer: null as unknown as Timer,
-    activeButton: null,
+    activeButton: null as timerMode,
   }),
   created() {
     this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime) as Timer;
@@ -49,12 +50,12 @@ export default Vue.extend({
       this.beep();
       this.globalData.faviconType = 'stopped';
     },
-    startTicking(ms) {
+    startTicking(ms: number) {
       this.timer.reset(ms);
       this.play();
     },
     askNotification() {
-      Notification.requestPermission().then(function setPermission(result) {
+      Notification.requestPermission().then((result) => {
         this.globalData.notificationPermission = result;
       });
     },
@@ -69,11 +70,12 @@ export default Vue.extend({
         }
       };
     },
-    switchTimerMode(timerMode) {
+    switchTimerMode(timerMode: timerMode) {
       this.activeButton = timerMode;
+      if (timerMode === null) return;
       this.startTicking(timerModeTime[timerMode]);
     },
-    updateTime(time) {
+    updateTime(time: number) {
       this.currentTime = time;
     },
     play() {
