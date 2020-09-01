@@ -31,7 +31,7 @@ export default Vue.extend({
     this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime) as Timer;
   },
   computed: {
-    formattedTime() {
+    formattedTime(): string {
       let minutes = String(Math.floor(this.currentTime / 1000 / 60));
       minutes = (minutes.length === 1 ? '0' : '') + minutes;
       let seconds = String(Math.floor((this.currentTime / 1000) % 60));
