@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
@@ -14,7 +15,7 @@ const timerModeTime = {
   longBreak: minutesToMs(10),
 };
 
-export default {
+export default Vue.extend({
   name: 'ControlBar',
   components: {
     PlayButton,
@@ -85,4 +86,4 @@ export default {
       this.timer.stop();
     },
   },
-};
+});
