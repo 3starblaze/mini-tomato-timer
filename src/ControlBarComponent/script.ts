@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import GlobalDataHandler from '../utils/GlobalDataHandler.ts';
 import tmpBeepSound from '../assets/alarm-clock-short.wav';
 import PlayButton from '../assets/play.svg';
@@ -6,32 +7,32 @@ import Timer from '../utils/Timer.ts';
 
 const beepSound = new Audio(tmpBeepSound);
 
-const minutesToMs = (minutes) => minutes * 60000;
+const minutesToMs = (minutes: number) => minutes * 60000;
 
+type timerMode = 'session' | 'shortBreak' | 'longBreak' | null;
 const timerModeTime = {
   session: minutesToMs(25),
   shortBreak: minutesToMs(5),
   longBreak: minutesToMs(10),
 };
 
-export default {
+export default Vue.extend({
   name: 'ControlBar',
   components: {
     PlayButton,
     StopButton,
   },
   data: () => ({
-    globalData: null,
+    globalData: (new GlobalDataHandler()).data,
     currentTime: 25 * 1000 * 60,
-    timer: null,
-    activeButton: null,
+    timer: null as unknown as Timer,
+    activeButton: null as timerMode,
   }),
   created() {
-    this.globalData = (new GlobalDataHandler()).data;
-    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime);
+    this.timer = new Timer(this.currentTime, this.onTickEnd, this.updateTime) as Timer;
   },
   computed: {
-    formattedTime() {
+    formattedTime(): string {
       let minutes = String(Math.floor(this.currentTime / 1000 / 60));
       minutes = (minutes.length === 1 ? '0' : '') + minutes;
       let seconds = String(Math.floor((this.currentTime / 1000) % 60));
@@ -49,12 +50,12 @@ export default {
       this.beep();
       this.globalData.faviconType = 'stopped';
     },
-    startTicking(ms) {
+    startTicking(ms: number) {
       this.timer.reset(ms);
       this.play();
     },
     askNotification() {
-      Notification.requestPermission().then(function setPermission(result) {
+      Notification.requestPermission().then((result) => {
         this.globalData.notificationPermission = result;
       });
     },
@@ -69,11 +70,12 @@ export default {
         }
       };
     },
-    switchTimerMode(timerMode) {
+    switchTimerMode(timerMode: timerMode) {
       this.activeButton = timerMode;
+      if (timerMode === null) return;
       this.startTicking(timerModeTime[timerMode]);
     },
-    updateTime(time) {
+    updateTime(time: number) {
       this.currentTime = time;
     },
     play() {
@@ -85,4 +87,4 @@ export default {
       this.timer.stop();
     },
   },
-};
+});

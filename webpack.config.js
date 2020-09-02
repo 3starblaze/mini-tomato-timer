@@ -5,17 +5,37 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'inline-source-map',
+  entry: {
+    main: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      './src/index.ts',
+    ],
+  },
   module: {
     rules: [
       {
         test: /\.ts/,
-        use: ['ts-loader', 'eslint-loader'],
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.ts/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
+      {
+        test: /\.ts/,
+        loader: 'eslint-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.js/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loader: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.vue$/,

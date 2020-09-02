@@ -1,16 +1,19 @@
-import globalData from '../globalData.ts';
-
 export default class GlobalDataHandler {
-  private static _currentInstance: GlobalDataHandler | null = null;
+  private static currentInstance: GlobalDataHandler | null = null;
 
   data: any;
 
   constructor() {
-    const currentInstanceString = GlobalDataHandler._currentInstance ? GlobalDataHandler._currentInstance.toString : 'null';
-    if (GlobalDataHandler._currentInstance) return GlobalDataHandler._currentInstance;
-    this.data = globalData;
+    if (GlobalDataHandler.currentInstance) return GlobalDataHandler.currentInstance;
+    this.data = {
+      notificationPermission: Notification.permission,
+      pureView: false,
+      pureViewShortcut: 'p',
+      documentTitle: '',
+      faviconType: 'default', // 'default' | 'playing' | 'stopped'
+    };
     this.readPersistent();
-    GlobalDataHandler._currentInstance = this;
+    GlobalDataHandler.currentInstance = this;
   }
 
   updatePersistent(): void {

@@ -7,19 +7,19 @@ interface TickCallback {
 }
 
 export default class Timer {
-  _stopCallback: StopCallback | null;
+  private stopCallback: StopCallback | null;
 
-  _tickCallback: TickCallback | null;
+  private tickCallback: TickCallback | null;
 
-  _tickRate: number;
+  private tickRate: number;
 
-  _currentTickerId: number | null;
+  private currentTickerId: number | null;
 
-  _stopTime: number | null;
+  private stopTime: number | null;
 
-  _frozenCurrentTime: number;
+  private frozenCurrentTime: number;
 
-  _playState: 'playing' | 'stopped';
+  private playState: 'playing' | 'stopped';
 
   constructor(
     currentTime: number,
@@ -27,62 +27,62 @@ export default class Timer {
     tickCallback: TickCallback | null = null,
     tickRate = 100,
   ) {
-    this._frozenCurrentTime = currentTime;
-    this._stopCallback = stopCallback;
-    this._tickCallback = tickCallback;
-    this._tickRate = tickRate;
-    this._currentTickerId = null;
-    this._stopTime = null;
-    this._playState = 'stopped';
+    this.frozenCurrentTime = currentTime;
+    this.stopCallback = stopCallback;
+    this.tickCallback = tickCallback;
+    this.tickRate = tickRate;
+    this.currentTickerId = null;
+    this.stopTime = null;
+    this.playState = 'stopped';
   }
 
-  _stopTick(): void {
-    if (this._currentTickerId !== null) {
-      clearInterval(this._currentTickerId);
-      this._currentTickerId = null;
+  private stopTick(): void {
+    if (this.currentTickerId !== null) {
+      clearInterval(this.currentTickerId);
+      this.currentTickerId = null;
     }
   }
 
-  _startTick(): void {
-    this._stopTick();
+  private startTick(): void {
+    this.stopTick();
 
-    this._currentTickerId = window.setInterval(() => {
+    this.currentTickerId = window.setInterval(() => {
       if (this.currentTime <= 0) {
-        this._stopTick();
-        if (this._stopCallback !== null) {
-          this._stopCallback();
+        this.stopTick();
+        if (this.stopCallback !== null) {
+          this.stopCallback();
         }
       }
-      if (this._tickCallback !== null) this._tickCallback(this.currentTime);
-    }, this._tickRate);
+      if (this.tickCallback !== null) this.tickCallback(this.currentTime);
+    }, this.tickRate);
   }
 
   get currentTime(): number {
-    if (this._playState === 'playing' && this._stopTime !== null) {
-      const calculatedTime = this._stopTime - Date.now();
-      this._frozenCurrentTime = calculatedTime >= 0 ? calculatedTime : 0;
+    if (this.playState === 'playing' && this.stopTime !== null) {
+      const calculatedTime = this.stopTime - Date.now();
+      this.frozenCurrentTime = calculatedTime >= 0 ? calculatedTime : 0;
     }
-    return this._frozenCurrentTime;
+    return this.frozenCurrentTime;
   }
 
   set currentTime(ms: number) {
     if (typeof ms !== 'number') {
       throw new Error('`currentTime` is not a number!');
     }
-    this._frozenCurrentTime = ms;
+    this.frozenCurrentTime = ms;
   }
 
   play(): void {
-    if (this._playState === 'playing') return;
-    this._stopTime = Date.now() + this._frozenCurrentTime;
-    this._playState = 'playing';
-    this._startTick();
+    if (this.playState === 'playing') return;
+    this.stopTime = Date.now() + this.frozenCurrentTime;
+    this.playState = 'playing';
+    this.startTick();
   }
 
   stop(): void {
-    if (this._playState === 'stopped') return;
-    this._playState = 'stopped';
-    this._stopTick();
+    if (this.playState === 'stopped') return;
+    this.playState = 'stopped';
+    this.stopTick();
   }
 
   reset(ms: number): void {
