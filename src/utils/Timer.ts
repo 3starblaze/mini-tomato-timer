@@ -28,6 +28,9 @@ export default class Timer {
     tickRate = 100,
   ) {
     if (currentTime < 0) throw new Error('currentTime can\'t be negative');
+    if (typeof currentTime !== 'number') {
+      throw new Error('currenTime is not a number');
+    }
 
     this.frozenCurrentTime = currentTime;
     this.stopCallback = stopCallback;
