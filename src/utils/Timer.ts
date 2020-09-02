@@ -27,6 +27,8 @@ export default class Timer {
     tickCallback: TickCallback | null = null,
     tickRate = 100,
   ) {
+    if (currentTime < 0) throw new Error('currentTime can\'t be negative');
+
     this.frozenCurrentTime = currentTime;
     this.stopCallback = stopCallback;
     this.tickCallback = tickCallback;
