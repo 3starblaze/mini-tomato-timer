@@ -5,8 +5,9 @@ export default class GlobalDataHandler {
 
   constructor() {
     if (GlobalDataHandler.currentInstance) return GlobalDataHandler.currentInstance;
+    const permission = (typeof Notification !== 'undefined') ? Notification.permission : 'default';
     this.data = {
-      notificationPermission: Notification.permission,
+      notificationPermission: permission,
       pureView: false,
       pureViewShortcut: 'p',
       documentTitle: '',
