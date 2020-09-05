@@ -13,9 +13,15 @@ test('Expect negative time to throw', () => {
 });
 
 test('Expect string value to fail', () => {
-  expect(() => { new Timer('400'); }).toThrow();
+  expect(() => {
+    // @ts-expect-error
+    new Timer('400');
+  }).toThrow();
 });
 
 test('Expect object value to fail', () => {
-  expect(() => { new Timer({ foo: 'bar' }); }).toThrow();
+  expect(() => {
+    // @ts-expect-error
+    new Timer({ foo: 'bar' });
+  }).toThrow();
 });
